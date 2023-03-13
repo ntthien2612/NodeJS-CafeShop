@@ -1,8 +1,8 @@
 {
-  "name": "nodejs-basic",
+  "name": "nodebasic",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node src/server.js"
@@ -18,17 +18,15 @@
   },
   "homepage": "https://github.com/ntthien2612/NodeJS-Basic#readme",
   "dependencies": {
-    "@babel/core": "7.15.5",
-    "@babel/node": "7.15.4",
-    "@babel/preset-env": "7.15.6",
-    "app-root-path": "3.0.0",
-    "body-parser": "1.19.0",
-    "dotenv": "10.0.0",
-    "ejs": "3.1.6",
-    "express": "4.17.1",
-    "morgan": "1.10.0",
-    "multer": "1.4.3",
-    "mysql2": "2.3.0",
-    "nodemon": "2.0.12"
+    "@babel/core": "7.21.0",
+    "@babel/node": "7.20.7",
+    "@babel/preset-env": "7.20.2",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mysql2": "3.2.0",
+    "nodemon": "^2.0.21",
+    "view-engine": "^1.1.1"
   }
 }
