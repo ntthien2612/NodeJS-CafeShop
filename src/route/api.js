@@ -1,27 +1,16 @@
-import express from "express"
-
-
+import express from "express";
+import APIController from '../controller/APIController';
 
 let router = express.Router();
 
+const initAPIRoute = (app) => {
+    router.get('/users', APIController.getAllUsers); // method GET -> READ data
+    router.post('/create-user', APIController.createNewUser); // method POST -> CREATE data
+    router.put('/update-user', APIController.updateUser); //method PUT -> UPDATE data
+    router.delete('/delete-user/:id', APIController.deleteUser); //method DELETE -> DELETE data
 
-const initApiRoute = (app) => {
-    
-
-    router.get('/', homeController.getHomepage);
-    router.get('/detail/user/:id', homeController.getDetailPage);
-    router.post('/create-new-user', homeController.createNewUser);
-
-    router.post('/delete-user', homeController.deleteUser);
-    router.get('/edit-user/:id', homeController.getEditPage);
-    router.post('/update-user', homeController.postUpdateUser);
-
-    
-
-    return app.use('/', router)
+    return app.use('/api/v1/', router)
 }
 
 
-
-
-export default initApiRoute;
+export default initAPIRoute;

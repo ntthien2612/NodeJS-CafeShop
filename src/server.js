@@ -1,7 +1,7 @@
 import express from 'express'
 import configViewEngine from './configs/viewEngine';
 import initWebRoute from './route/web';
-
+import initAPIRoute from './route/api'
 
 require('dotenv').config();
 const path = require('path');
@@ -22,7 +22,7 @@ configViewEngine(app);
 //init web route
 initWebRoute(app);
 
-
+initAPIRoute(app);
 
 app.get('/about',  (req, res)=> {
   res.send('hello')
