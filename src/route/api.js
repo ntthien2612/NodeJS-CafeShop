@@ -10,6 +10,7 @@ const initAPIRoute = (app) => {
     router.delete('/delete-user/:id', APIController.deleteUser); //method DELETE -> DELETE data
 
     return app.use('/api/v1/', router)
+
 }
 
 
