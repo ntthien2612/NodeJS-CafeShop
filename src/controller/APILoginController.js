@@ -1,15 +1,9 @@
 import pool from '../configs/connectDB';
-
+const jsonwebtoken = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
-const saltRounds = 255;
+const saltRounds = 10;
 
-
-function hash_password(password){
-
-    const salt = bcrypt.genSaltSync(saltRounds);
-    const hash = bcrypt.hashSync(password, salt);
-    return hash;
-}
+const JWT_SECRET ="goK!pusp6ThEdURUtRenOwUhAsWUCLheBazl!uJLPlS8EbreWLdrupIwabRAsiBu";
 
 let getAllUsers = async (req, res) => {
     //http
@@ -33,10 +27,28 @@ let createNewUser = async (req, res) => {
         })
     }
 
-    // let pass = hash_password(password)
-    // console.log(pass);
+    const [User, fields] =  await pool.execute('SELECT * FROM `login` WHERE username = ? ',
+        [username]);
+
+
+    if(User!= ''){
+
+        return res.status(200).json({
+            message: 'tai khoan ton tai',
+        });
+    }
+
+    // Generate a salt with 10 rounds
+    const salt = await bcrypt.genSalt(saltRounds);
+
+    // Hash the password with the generated salt
+    const hashedPassword = await bcrypt.hash(password, salt);
+    
+    console.log(hashedPassword)
+
     await pool.execute('insert into login(username, password ) values (?, ?)',
-        [username, password]);
+        [username, hashedPassword]);
+
     return res.status(200).json({
         message: 'ok'
     })
@@ -52,13 +64,21 @@ let updateUser = async(req, res)=>{
         })
     }
 
+    // Generate a salt with 10 rounds
+    const salt = await bcrypt.genSalt(saltRounds);
+
+    // Hash the password with the generated salt
+    const hashedPassword = await bcrypt.hash(password, salt);
+    
+    
+    
     await pool.execute('update login set username= ?, password = ?  where id = ?',
-        [username, password, id]);
+        [username, hashedPassword, id]);
 
     
-        return res.status(200).json({
-            message: 'ok'
-        })
+    return res.status(200).json({
+        message: 'ok'
+    })
 }
 
 let deleteUser = async(req, res)=>{
@@ -86,17 +106,35 @@ let loginUser = async (req, res) => {
     }
 
   
-    const NumberUser =  await pool.execute('SELECT COUNT(username) AS NumberUser FROM `login` WHERE username = ? AND password =?',
-        [username, password]);
-    console.log(NumberUser[0][0].NumberUser)
-    let checklogin = "false";
-    if(NumberUser[0][0].NumberUser > 0){
-        checklogin = "true";
+    const [NumberUser, fields] =  await pool.execute('SELECT * FROM `login` WHERE username = ? ',
+        [username]);
+    
+    console.log(NumberUser);
+    
+    if(NumberUser== ''){
+
+        return res.status(200).json({
+            message: 'tai khoan khong ton tai',
+        });
     }
-    return res.status(200).json({
-        message: 'ok',
-        login: checklogin
-    })
+
+    let pass = NumberUser[0].password;
+
+
+    const isMatch = await bcrypt.compare(password, pass);
+
+    if (isMatch) {
+        return res.status(200).json({
+            message: 'ok',
+            User: NumberUser[0],
+            token: jsonwebtoken.sign({ user: NumberUser[0].username }, JWT_SECRET,{expiresIn: 15*60}),
+        })
+    } else {
+        return res.status(200).json({
+            message: 'sai mat khau',
+        })
+    }
+
 }
 
 

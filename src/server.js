@@ -5,7 +5,7 @@ import initAPIRoute from './route/api'
 import initAPIRouteLogin from './route/api_login'
 require('dotenv').config();
 const path = require('path');
-var morgan = require('morgan')
+// var morgan = require('morgan')
 
 
 const app = express()
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 
 
 

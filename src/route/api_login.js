@@ -3,6 +3,9 @@ import APILoginController from '../controller/APILoginController';
 
 let router = express.Router();
 
+
+
+
 const initAPIRouteLogin = (app) => {
     router.get('/users', APILoginController.getAllUsers); // method GET -> READ data
     router.post('/create-user', APILoginController.createNewUser); // method POST -> CREATE data

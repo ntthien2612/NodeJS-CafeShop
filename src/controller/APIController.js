@@ -39,7 +39,9 @@ let updateUser = async(req, res)=>{
             message: 'missing required params'
         })
     }
-
+    
+    
+     
     await pool.execute('update todolist set firstname= ?, lastname = ? , email = ? , address= ? where id = ?',
         [firstname, lastname, email, address, id]);
 
