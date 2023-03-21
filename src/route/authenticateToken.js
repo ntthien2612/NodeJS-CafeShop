@@ -1,19 +1,21 @@
 const jwt = require('jsonwebtoken');
 const JWT_SECRET ="goK!pusp6ThEdURUtRenOwUhAsWUCLheBazl!uJLPlS8EbreWLdrupIwabRAsiBu";
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
 
-  if (token == null) return res.sendStatus(401)
+const authenticateToken= (req, res, next)=>{
+  
+  const token = req.cookies.token;
+  console.log(token);
+  if (token == null) return  res.redirect('/login');;
 
   jwt.verify(token, JWT_SECRET, (err, user) => {
-    console.log(err)
+    console.log(err);
 
-    if (err) return res.sendStatus(403)
-
+    if (err) return res.redirect('/login');
     req.user = user
+    console.log(user)
+    console.log("username",req.user)
 
-    next()
+    next();
   })
 }
 

@@ -7,6 +7,8 @@ let getLogin = (req, res) => {
 
 
 let getHomepage = async (req, res) => {
+    console.log(req.user.user)
+
     const [rows, fields] = await pool.execute('SELECT * FROM todolist ');
 
     return res.render('index.ejs', { dataUser: rows, test: 'abc string test' })

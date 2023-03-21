@@ -3,6 +3,10 @@ import configViewEngine from './configs/viewEngine';
 import initWebRoute from './route/web';
 import initAPIRoute from './route/api'
 import initAPIRouteLogin from './route/api_login'
+
+const  cookieParser = require('cookie-parser')
+
+
 require('dotenv').config();
 const path = require('path');
 // var morgan = require('morgan')
@@ -10,6 +14,10 @@ const path = require('path');
 
 const app = express()
 const port = process.env.PORT || 8080;
+
+// curl command that sends an HTTP request with two cookies
+app.use(cookieParser())
+
 
 
 app.use((req, res, next) => {
@@ -20,8 +28,6 @@ app.use((req, res, next) => {
 })
 
 // app.use(morgan('combined'))
-
-
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

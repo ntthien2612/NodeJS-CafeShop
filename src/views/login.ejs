@@ -9,36 +9,46 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <div class="container">
-    <form method="post" action="/api/v1/login/login">
 
         <div class="col">
             <div class="hide-md-lg">
                 <p>Or sign in manually:</p>
             </div>
-
             <input type="text" name="username" id="username" placeholder="Username" required>
             <input type="password" name="password" id="password" placeholder="Password" required>
             <button onclick="login()"> Login</button>
         </div>
-
-    </form>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 <script>
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+
     function login(){
         $.ajax({
             url:'/api/v1/login/login',
-            type: POST,
+            type: 'POST',
             data:{
                 username: $('#username').val(),
                 password: $('#password').val()
             }
         }).then(data=>{
-            console.log(data);
+            if(data.User == ''){
+                alert(data.message);
+            }else{
+                token = data.token;
+                setCookie('token', token, 1);
+                window.location.href = "http://localhost:8080/";
+            }
         }).catch(err=>{
-            console.log(err)
+            console.log("Thất bại")
         })
     }
 

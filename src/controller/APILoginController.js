@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const JWT_SECRET ="goK!pusp6ThEdURUtRenOwUhAsWUCLheBazl!uJLPlS8EbreWLdrupIwabRAsiBu";
-
+const timeExpiresIn = 60;
 let getAllUsers = async (req, res) => {
     //http
     // 404 501
@@ -96,7 +96,7 @@ let deleteUser = async(req, res)=>{
 
 let loginUser = async (req, res) => {
     let { username, password } = req.body;
-    console.log( username)
+    console.log(username)
 
     if (!username || !password ) {
         return res.status(200).json({
@@ -114,6 +114,8 @@ let loginUser = async (req, res) => {
 
         return res.status(200).json({
             message: 'tai khoan khong ton tai',
+            User: [],
+            token: ''
         });
     }
 
@@ -123,14 +125,17 @@ let loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, pass);
 
     if (isMatch) {
+        console.log("đăng nhập thành công");
         return res.status(200).json({
             message: 'ok',
             User: NumberUser[0],
-            token: jsonwebtoken.sign({ user: NumberUser[0].username }, JWT_SECRET,{expiresIn: 15*60}),
+            token: jsonwebtoken.sign({ user: NumberUser[0].username }, JWT_SECRET,{expiresIn: timeExpiresIn}),
         })
     } else {
         return res.status(200).json({
             message: 'sai mat khau',
+            User: [],
+            token: ''
         })
     }
 
