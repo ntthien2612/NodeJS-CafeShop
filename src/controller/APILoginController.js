@@ -20,7 +20,6 @@ let getAllUsers = async (req, res) => {
 let createNewUser = async (req, res) => {
     let { username, password } = req.body;
 
-
     if (!username || !password ) {
         return res.status(200).json({
             message: 'missing required params'
@@ -97,7 +96,7 @@ let deleteUser = async(req, res)=>{
 
 let loginUser = async (req, res) => {
     let { username, password } = req.body;
-
+    console.log( username)
 
     if (!username || !password ) {
         return res.status(200).json({

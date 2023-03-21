@@ -1,5 +1,6 @@
 import express from "express"
 import homeController from '../controller/homeController.js';
+import authenticateToken from './authenticateToken';
 import multer from 'multer';
 import path from 'path';
 var appRoot = require('app-root-path');
@@ -33,6 +34,9 @@ let uploadMultipleFiles = multer({ storage: storage, fileFilter: imageFilter }).
 
 const initWebRoute = (app) => {
     
+    router.get('/login', homeController.getLogin);
+
+
 
     router.get('/', homeController.getHomepage);
     router.get('/detail/user/:id', homeController.getDetailPage);

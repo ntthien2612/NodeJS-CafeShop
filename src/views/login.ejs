@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<div class="container">
+    <form method="post" action="/api/v1/login/login">
+
+        <div class="col">
+            <div class="hide-md-lg">
+                <p>Or sign in manually:</p>
+            </div>
+
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <button onclick="login()"> Login</button>
+        </div>
+
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+    function login(){
+        $.ajax({
+            url:'/api/v1/login/login',
+            type: POST,
+            data:{
+                username: $('#username').val(),
+                password: $('#password').val()
+            }
+        }).then(data=>{
+            console.log(data);
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+
+</script>
+</body>
+
+</html>

@@ -1,5 +1,9 @@
 import pool from '../configs/connectDB';
 
+let getLogin = (req, res) => {
+    return res.render('login.ejs')
+}
+
 
 
 let getHomepage = async (req, res) => {
@@ -89,4 +93,4 @@ let handleUploadMultipleFiles = async (req, res) => {
     res.send(result);
 
 }
-module.exports  = { getHomepage, getDetailPage, createNewUser,deleteUser, getEditPage, postUpdateUser, getUploadFilePage, handleUploadFile, handleUploadMultipleFiles }
+module.exports  = { getLogin, getHomepage, getDetailPage, createNewUser,deleteUser, getEditPage, postUpdateUser, getUploadFilePage, handleUploadFile, handleUploadMultipleFiles }
