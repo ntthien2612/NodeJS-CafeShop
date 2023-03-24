@@ -1,9 +1,10 @@
 import express from "express"
 import homeController from '../controller/homeController.js';
-import authenticateToken from './authenticateToken';
+import authenticateToken from '../middlewares/authenticateToken';
 import multer from 'multer';
 import path from 'path';
 var appRoot = require('app-root-path');
+
 
 
 let router = express.Router();
@@ -36,6 +37,7 @@ const initWebRoute = (app) => {
     
     router.get('/login', homeController.getLogin);
 
+    router.get('/chat', homeController.getChat);
 
 
     router.get('/', authenticateToken, homeController.getHomepage);

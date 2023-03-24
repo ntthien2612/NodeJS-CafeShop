@@ -65,8 +65,28 @@ let deleteUser = async(req, res)=>{
 
 }
 
+let handleUploadFile = async (req, res) => {
 
+    if (req.fileValidationError) {
+
+        return res.status(200).json({
+            message: req.fileValidationError
+        });
+    }
+    else if (!req.file) {
+        return res.status(200).json({
+            message: 'Please select an image to upload'
+        });
+    }
+
+    // Display uploaded image for user validation
+    
+    // });
+    return res.status(200).json({
+        message: req.file.filename
+    });
+}
 
 module.exports = {
-    getAllUsers, createNewUser, updateUser, deleteUser
+    getAllUsers, createNewUser, updateUser, deleteUser,handleUploadFile
 }

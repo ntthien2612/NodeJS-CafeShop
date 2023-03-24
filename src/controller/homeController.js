@@ -4,7 +4,9 @@ let getLogin = (req, res) => {
     return res.render('login.ejs')
 }
 
-
+let getChat = (req, res) => {
+    return res.render('chat.ejs')
+}
 
 let getHomepage = async (req, res) => {
     console.log(req.user.user)
@@ -95,4 +97,4 @@ let handleUploadMultipleFiles = async (req, res) => {
     res.send(result);
 
 }
-module.exports  = { getLogin, getHomepage, getDetailPage, createNewUser,deleteUser, getEditPage, postUpdateUser, getUploadFilePage, handleUploadFile, handleUploadMultipleFiles }
+module.exports  = { getChat, getLogin, getHomepage, getDetailPage, createNewUser,deleteUser, getEditPage, postUpdateUser, getUploadFilePage, handleUploadFile, handleUploadMultipleFiles }
