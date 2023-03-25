@@ -3,6 +3,9 @@ import APIController from '../controller/APIController';
 import authenticateToken from '../middlewares/authenticateToken';
 import multer from 'multer';
 
+import path from 'path';
+var appRoot = require('app-root-path');
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, appRoot + "/src/public/image/");

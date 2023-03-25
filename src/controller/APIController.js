@@ -80,7 +80,7 @@ let handleUploadFile = async (req, res) => {
     }
 
     // Display uploaded image for user validation
-    
+    // Lấy name lưu vào cơ sở dữ liệu
     // });
     return res.status(200).json({
         message: req.file.filename
