@@ -7,13 +7,20 @@
     <title>Node.JS Basic</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="/js/main.js"></script>
 </head>
 
 <body>
     <div class="topnav">
-        <a class="active" href="/">Home</a>
-        <a href="/upload">Upload file</a>
-
+        <div>
+            <a class="active" href="/">Home</a>
+            <a href="/upload">Upload file</a>
+        </div>
+        
+        <div>
+            <button id="Logout" class="Logout" onclick="logout()">Logout</button>
+        </div>
+        
     </div>
 
     <div>
@@ -93,6 +100,13 @@
        
     </div>
 
+    <script>
+        function logout(){
+            setCookie('token', '', 0);
+            alert('bạn muốn đăng xuất')
+            location.reload();
+        }
+    </script>
 </body>
 
 </html>

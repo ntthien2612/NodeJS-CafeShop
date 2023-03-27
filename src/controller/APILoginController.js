@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const JWT_SECRET ="goK!pusp6ThEdURUtRenOwUhAsWUCLheBazl!uJLPlS8EbreWLdrupIwabRAsiBu";
-const timeExpiresIn = 60;
+const timeExpiresIn = 60*15;
 let getAllUsers = async (req, res) => {
     //http
     // 404 501
