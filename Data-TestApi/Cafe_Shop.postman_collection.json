@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "2ad616af-5479-4bda-85aa-c67c22d379f1",
+		"name": "Cafe_Shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23095289"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8081/api/v1/auth/signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"user_name\":\"thien04\", \r\n    \"email\": \"thien04@gmail.com\" ,\r\n    \"pass_word\":\"123456789\",\r\n    \"phone\":\"123456789\",\r\n    \"roles\":[\"order\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/v1/auth/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/auth/signUpdate/:UserIdUpdate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"user_name\":\"thien05\", \r\n    \"email\": \"thien04@gmail.com\" ,\r\n    \"pass_word\":\"123456789\",\r\n    \"phone\":\"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/v1/auth/signUpdate/5"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/auth/signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"user_name\":\"thien02\", \r\n    \"pass_word\":\"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/v1/auth/signin"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/table",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8081/api/v1/table"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/table",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n      \"table_name\": \"06\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/v1/table"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/table/:tableId",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n      \"table_name\": \"07\"  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/v1/table/4"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/table/:tableId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8081/api/v1/table/4"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8081/api/v1/category"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/category",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n      \"category_name\": \"NƯỚC NGỌT\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/v1/category"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/category/4",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n      \"category_name\": \"NƯỚC ÉP\"  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/v1/category/4"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/category/4",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8081/api/v1/category/4"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/product?product_name=tra",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/v1/product?product_name=tra",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"product"
+					],
+					"query": [
+						{
+							"key": "product_name",
+							"value": "tra"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8081/api/v1/product"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "img",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "product_name",
+							"value": "Trà Sữa",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "25000",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "15000",
+							"type": "text"
+						},
+						{
+							"key": "id_category",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8081/api/v1/product"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/product/7",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "img",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "product_name",
+							"value": "Trà Sữa",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "25000",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "15000",
+							"type": "text"
+						},
+						{
+							"key": "id_category",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8081/api/v1/product/7"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/product/:tableId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8081/api/v1/product/6"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/order/1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"order\",\r\n    \"detail_order_bill\": [\r\n        {\r\n            \"id_product\": 3,\r\n            \"number\" : 1,\r\n            \"note\": \"it duong\"\r\n        },\r\n        {\r\n            \"id_product\": 4,\r\n            \"number\" : 1,\r\n            \"note\": \"it duong\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081//api/v1/order/1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/order/:orderId",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjk1MzU1NjUyLCJleHAiOjE2OTU0NDIwNTJ9.elBpalDDboiGDq7LURtWBCtdeN8s2V3Y4xojrhucxB0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"bill\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/v1/order/14"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/payment/:orderId",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjk1MzU2MDQ4LCJleHAiOjE2OTU0NDI0NDh9.5PF8NeFJT88PzAgYx8fff6aQlKuMa4B9OYv2gJnvbDk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"payment\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/api/v1/payment/15"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/api/v1/order/14",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8081/api/v1/order/14"
+			},
+			"response": []
+		}
+	]
+}

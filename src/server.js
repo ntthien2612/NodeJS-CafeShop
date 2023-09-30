@@ -1,60 +1,109 @@
-import express from 'express'
-import configViewEngine from './configs/viewEngine';
-import initWebRoute from './route/web';
-import initAPIRoute from './route/api'
-import initAPIRouteLogin from './route/api_login'
+// Import necessary modules using ESM syntax
+import express from "express";
+import cors from "cors";
+import cookieSession from "cookie-session";
 
-const  cookieParser = require('cookie-parser')
+import { AuthRouter } from "./routes/auth.routes"
+import { TableRouter } from "./routes/table.routes"
+import { CategoryRouter } from "./routes/category.routes";
+import { ProductRouter } from "./routes/product.routers"
+import { OrderBillRouter } from "./routes/order_bill.routes"
+import bodyParser from "body-parser";
 
+import path from "path";
 
-require('dotenv').config();
-const path = require('path');
-// var morgan = require('morgan')
+import db from "./models/index";
 
-
-const app = express()
-const port = process.env.PORT || 8080;
-
-// curl command that sends an HTTP request with two cookies
-app.use(cookieParser())
+global.__basedir = __dirname;
 
 
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
 
-app.use((req, res, next) => {
-  //check => return res.send()
-  console.log('>>> run into my middleware')
-  console.log(req.method)
-  next();
-})
 
-// app.use(morgan('combined'))
 
-app.use(express.urlencoded({ extended: true }));
+const app = express();
+
+app.use(cors(corsOptions));
+
+// Parse requests of content-type - application/json
 app.use(express.json());
 
+app.use(bodyParser.urlencoded({extended: false}));
 
-// setup view engine
-configViewEngine(app);
+// Parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
 
-//init web route
-initWebRoute(app);
+// give public access to public folder
+console.log(__dirname);
+app.use(express.static(path.join(__dirname, 'public')));
 
-initAPIRoute(app);
-
-
-initAPIRouteLogin(app);
-
-app.get('/about',  (req, res)=> {
-  res.send('hello')
-})
-
-//handle 404 not found
-app.use((req, res) => {
-  return res.render('404.ejs')
-})
+app.use(
+  cookieSession({
+    name: "bezkoder-session",
+    keys: ["COOKIE_SECRET"], // should use as a secret environment variable
+    httpOnly: true,
+  })
+);
 
 
+const roles = db.tables.roles;
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+
+// khởi tạo database khi chưa có
+// db.sequelize.sync({force: true}).then(() => {
+//   console.log('Drop and Resync Db');
+ 
+// });
+
+// khởi tạo quyền khi chưa có
+// if(!checkIfTableHasData(roles)){
+//   initial();
+// }
+
+// Simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to bezkoder application." });
+});
+
+// main router
+AuthRouter(app);
+TableRouter(app);
+CategoryRouter(app);
+ProductRouter(app);
+OrderBillRouter(app);
+
+// connect server
+const PORT = process.env.PORT || 8081;
+app.listen(PORT, () => {
+  console.log(`Server is running http://localhost:8081`);
+});
+
+// khởi tạo quyền người dùng
+function initial() {
+  roles.create({
+    id: 1,
+    role_name	: "admin"
+  });
+
+  roles.create({
+    id: 2,
+    role_name	: "order"
+  });
+
+  roles.create({
+    id: 3,
+    role_name	: "bartender"
+  });
+}
+
+// check table có dữ liệu chưa
+async function checkIfTableHasData(Table) {
+    const rowCount = await Table.count();
+    if (rowCount > 0) {
+      return true;
+    } else {
+      return false;
+    }
+}
